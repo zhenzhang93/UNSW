@@ -1,3 +1,4 @@
+#quiz1
 def describe_automaton(transitions):
     for key in transitions:
         print("When in state " + "\"{}\"".format(key[0]) + " and processing "
@@ -37,3 +38,6 @@ def accepts(transitions, word, initial_state, accept_state):
             else:
                 return False
     return initial_state == accept_state
+	
+
+
