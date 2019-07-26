@@ -1,0 +1,430 @@
+#!/bin/dash
+
+directory=".legit"
+indexfile="$directory/index"
+commitdir="$directory/.commit"
+log="$directory/number.txt"
+
+#check the file has a valid filename
+
+judgevalid(){
+
+	if [ "$1" = "" ]
+	then
+		return 1
+	fi
+
+	if echo "$1" | egrep -q "^[^a-zA-Z0-9]"
+	then
+		return 1
+	fi
+
+	if echo "$1" | egrep -q "[^a-zA-Z0-9\._\-]"
+	then
+		return 1
+	fi	
+	return 0
+}
+
+
+samefile(){
+#return 0 means same
+#return 1 means different	
+	diff $1 $2 > /dev/null
+	if [ $? -eq 0 ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+
+if [ ! -d "$directory" ]
+then
+	echo "legit-rm: error: no .legit directory containing legit repository exists"
+	exit 1
+fi
+
+
+if [ ! -d "$commitdir" ]
+then
+	echo "legit-rm: error: your repository does not have any commits yet"
+	exit 1
+fi
+
+
+
+if echo "$1" | egrep -q '\-.'
+then
+	if echo "$1" | egrep -q '\-\-force'
+	then
+		if echo "$2" | egrep -q '\-\-cached'
+		then 
+
+#check all the filenames
+			for i in "$@"
+			do
+				if [ "$i" = "--force" ]
+				then
+					continue
+				elif [ "$i" = "--cached" ]
+				then
+					continue
+				else
+					judgevalid "$i"
+	
+					if [ $? -eq 1 ]
+					then
+						echo "legit-rm: error: invalid filename '$i'"
+						exit 1
+					fi
+
+					string=`find $indexfile -name $i`
+
+					if [ "$string" = "" ]
+					then
+						echo "legit-rm: error: '$i' is not in the legit repository"
+						exit 1
+					fi
+				fi
+			done
+#--force --cached		
+
+			for i in "$@"
+			do 
+				if [ "$i" = "--force" ]
+				then
+					continue
+				elif [ "$i" = "--cached" ]
+				then
+					continue
+				else
+					rm -f $indexfile/$i
+				fi	
+			done
+			exit 0
+					
+		else
+			if echo "$2" |egrep -q '\-.'
+			then
+				echo "usage: legit-rm [--force] [--cached] <filenames>"
+	
+			exit 1
+#case --force filenames
+			else
+				
+				for i in "$@"
+				do 
+		
+					if [ "$i" = "--force" ]
+					then
+						continue
+					else
+						
+						judgevalid "$i"
+
+						if [ $? -eq 1 ]
+						then
+							echo "legit-rm: error: invalid filename '$i'"
+							exit 1
+						fi
+
+						string=`find $indexfile -name $i`
+
+						if [ "$string" = "" ]
+						then
+							echo "legit-rm: error: '$i' is not in the legit repository"
+							exit 1
+						fi
+			
+					fi
+				done
+
+				for i in "$@"
+				do 
+					if [ "$i" = "--force" ]
+					then
+						continue
+
+					else
+						rm -f $indexfile/$i
+						rm -f $i
+					fi	
+				done
+				exit 0			
+			fi
+		fi
+
+	elif echo "$1" | egrep -q '\-\-cached'
+	then
+		if echo "$2" | egrep -q '\-\-force'
+		then
+		
+			for i in "$@"
+			do
+				if [ "$i" = "--cached" ]
+				then
+					continue
+				elif [ "$i" = "--force" ]
+				then
+					continue
+				else
+					judgevalid "$i"
+	
+					if [ $? -eq 1 ]
+					then
+						echo "legit-rm: error: invalid filename '$i'"
+						exit 1
+					fi
+
+					string=`find $indexfile -name $i`
+
+					if [ "$string" = "" ]
+					then
+						echo "legit-rm: error: '$i' is not in the legit repository"
+						exit 1
+					fi
+				fi
+			done
+#--cached --force		
+			for i in "$@"
+			do 
+				if [ "$i" = "--force" ]
+				then
+					continue
+				elif [ "$i" = "--cached" ]
+				then
+					continue
+				else
+					rm -f $indexfile/$i
+				fi	
+			done
+			exit 0
+
+
+
+		else
+
+			if echo "$2" |egrep -q '\-.'
+			then
+				echo "usage: legit-rm [--force] [--cached] <filenames>"
+				exit 1
+			fi
+
+
+#--cached filenames
+		
+			for i in "$@"
+			do
+				if [ "$i" = "--cached" ]
+				then
+					continue
+				else
+					judgevalid "$i"
+	
+					if [ $? -eq 1 ]
+					then
+						echo "legit-rm: error: invalid filename '$i'"
+						exit 1
+					fi
+
+					string=`find $indexfile -name $i`
+
+					if [ "$string" = "" ]
+					then
+						echo "legit-rm: error: '$i' is not in the legit repository"
+						exit 1
+					fi
+				fi
+			done
+			
+			
+			for i in $@
+			do
+
+# --cached filename, need to check, if the index file is the same with commit, can be rm, else, check it with current index and commit 	
+				if [ "$i" = "--cached" ]
+				then
+					continue
+				else
+					findcommitfile=`find $commitdir -name $i`
+
+#means it does not commit yet,can be rm
+					if [ "$findcommitfile" = "" ]
+					then
+						rm -f $indexfile/$i
+						
+					else			
+						samefile $indexfile/$i $findcommitfile
+						if [ $? -eq 0 ]
+						then		
+							rm -f $indexfile/$i
+						
+						else
+							findres=`find $i 2>/dev/null`
+#it has been rm in the current dir
+							if [ "$findres" = "" ]
+							then
+								rm -f $indexfile/$i
+							
+							else
+#check current dir with commit, condition : index and commit is not same
+
+								samefile $i $findcommitfile
+								if [ $? -eq 0 ]
+								then
+									echo "legit-rm: error: '$i' in index is different to both working file and repository"
+								else
+									samefile $indexfile/$i $i
+									if [ $? -eq 0 ]
+									then
+										rm -f $indexfile/$i
+									else
+										echo "legit-rm: error: '$i' in index is different to both working file and repository"
+										exit 1
+									fi
+								fi
+							fi
+						fi
+					fi
+				fi
+
+			done
+			exit 0
+		fi
+	
+	else
+	
+		echo "usage: legit-rm [--force] [--cached] <filenames>"
+		exit 1
+		
+	fi
+	
+
+else
+
+#just filenames
+
+	for i in "$@"
+	do
+		judgevalid "$i"
+		if [ $? -eq 1 ]
+		then
+			echo "legit-rm: error: invalid filename '$i'"
+			exit 1
+		fi
+		string=`find $indexfile -name $i`		
+		if [ "$string" = "" ]
+		then
+			echo "legit-rm: error: '$i' is not in the legit repository"
+			exit 1
+		fi
+	done
+	
+	for i in "$@"
+	do
+		string=`find $indexfile -name $i`
+
+		#echo "$string"
+
+		if [ ! -d "$commitdir" ]
+		then
+			echo "legit-rm: error: your repository does not have any commits yet"
+			exit 1
+		else
+
+			if [ ! -e $i ]
+			then
+				rm -f $indexfile/$i
+			else
+		
+#index compare with the current dir		
+				lastestversion=`cat $log | tail -n1 | cut -d '-' -f1`
+				findfile=`find $commitdir -name $i+$lastestversion`
+				if [ "$findfile" = "" ]
+				then
+					echo "legit-rm: error: '$i' has changes staged in the index"
+					exit 1
+				fi
+
+#check commit with current dir
+
+				samefile $i $findfile
+		
+				if [ $? -eq 0 ]
+				then
+
+#check if it is the same with last commit, commit compare index..condition:current file is the same with commit file
+
+					lastestversion=`cat $log | tail -n1 | cut -d '-' -f1`
+					findfile=`find $commitdir -name $i+$lastestversion`
+					if [ "$findfile" = "" ]
+					then
+						echo "legit-rm: error: '$i' has changes staged in the index"
+						exit 1
+					else
+
+						samefile "$findfile" "$indexfile/$i"
+						if [ $? -eq 0 ]
+						then
+							rm -f $indexfile/$i
+							rm -f $i
+
+						else
+							echo "legit-rm: error: '$i' has changes staged in the index"
+							exit 1
+						fi
+					fi
+				else
+
+#check commit with index.......condition:current dir is not same with commit
+				
+			
+					lastestversion=`ls $commitdir | egrep $i |cut -d '+' -f2 | sed 's/[^0-9]//g' |sort -nr |head -n1`
+
+					findindexfile=`find $indexfile -name $i`
+			
+					if [ "$lastestversion" = "" ]
+					then
+						echo "deal  later"
+						exit 1
+					fi
+
+
+					samefile $findindexfile $commitdir/$i+$lastestversion
+
+					if [ $? -eq 0 ]
+					then 
+						echo "legit-rm: error: '$i' in repository is different to working file"	
+						exit 1	
+					else
+					
+						samefile $findindexfile $i
+						if [ $? -eq 0 ]
+						then
+							echo "legit-rm: error: '$i' has changes staged in the index"
+							exit 1
+						else
+							echo "legit-rm: error: '$i' in index is different to both working file and repository"	
+							exit 1	
+						fi
+					fi
+				fi		
+			fi
+		fi
+	done
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
