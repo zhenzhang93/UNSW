@@ -1,0 +1,67 @@
+#!/bin/dash
+
+directory=".legit"
+commitdir="$directory/.commit"
+indexdir="$directory/index"
+
+samefile(){
+	
+	diff $1 $2 > /dev/null
+	if [ $? -eq 0 ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+
+judgevalid(){
+
+	if [ "$1" = "" ]
+	then
+		return 1
+	fi
+
+	if echo "$1" | egrep -q "^[^a-zA-Z0-9]"
+	then
+		return 1
+	fi
+
+	if echo "$1" | egrep -q "[^a-zA-Z0-9\._\-]"
+	then
+		return 1
+	fi	
+	return 0
+}
+
+
+
+if [ ! -d $directory ]
+then
+	echo "legit-status: error: no .legit directory containing legit repository exists"
+	exit 1
+fi
+
+
+if [ ! -d "$commitdir" ]
+then
+	echo "legit-status: error: your repository does not have any commits yet"
+	exit 1
+fi	
+
+
+#need file to record the filename in the current dir, index and commit
+
+cur=`ls`
+commit=`ls $commitdir`
+index=`ls $indexdir`
+
+
+
+
+
+rm -f $temppath
+
+
+

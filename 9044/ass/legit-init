@@ -1,0 +1,39 @@
+#!/bin/dash
+
+#subset 0
+
+	#1.legtit-init
+
+#mkdir if is does not exist
+
+directory=".legit"
+
+branchdir="$directory/.branch";
+
+if [ $# -gt 0 ]
+then
+	echo "usage: legit-init"
+	exit 1
+fi
+
+
+if [ -d "$directory" ]
+then
+	echo "legit-init: error: .legit already exists"
+
+	mkdir -p "$branchdir"
+
+
+
+else
+	mkdir "$directory"
+
+	mkdir -p "$branchdir"
+#updated:add branch.txt
+	touch $directory/branches.txt
+	echo master > $directory/branches.txt
+
+	echo "Initialized empty legit repository in .legit"
+	
+fi
+

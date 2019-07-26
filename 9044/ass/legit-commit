@@ -1,0 +1,368 @@
+#!/bin/dash
+
+indexfile=".legit/index"
+directory=".legit"
+#commitdir is the commitdir of commit 
+commitdir="$directory/.commit"
+
+
+
+samefile(){
+#return 0 means same
+#return 1 means different	
+	diff $1 $2 > /dev/null
+#0means same
+	if [ $? -eq 0 ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+#commit function. add something to the index and then commit to the repository
+
+
+if [ ! -d "$directory" ]
+then
+	echo "legit-add: error: no .legit directory containing legit repository exists"
+	exit 1
+fi
+
+
+
+currentbranch=`cat "$directory/branches.txt" | tail -n1`
+
+if [ "$currentbranch" != "master" ]
+then
+	indexfile="$directory/.branch/$currentbranch/index"
+fi
+
+
+
+
+
+if [ $# -eq 0 ]
+then
+	echo "usage: legit-commit [-a] -m commit-message"
+	exit 1
+fi
+
+if [ $# -eq 3 ]
+then
+	if [ $1 = "-a" ]
+	then
+		if [ $2 = "-m" ]
+		then
+
+
+			if [ ! -d $indexfile ]
+			then
+				echo "nothing to commit"
+			 	exit 0
+			fi
+
+			numofindex=`ls $indexfile/|wc -l`				
+			if [ $numofindex -eq 0 ]
+			then
+				echo "nothing to commit"
+			 	exit 0
+			fi
+
+
+			if [ ! -d $commitdir ]
+			then
+				touch $directory/number.txt
+			fi
+
+
+#commit -a -m		
+
+			for file in $indexfile/*
+			do
+				filename=`echo "$file" |cut -d '/' -f3`
+				currentdir=`find $filename 2> /dev/null `
+
+#""means the file has been deleted in the current dir
+
+				if [ "$currentdir" = "" ]
+				then
+					rm -rf $indexfile/$filename
+				
+				else
+					cp $currentdir $indexfile/$filename
+				
+				fi	
+			done
+
+
+
+			mkdir -p $commitdir	
+		
+			commitfilenum=0
+			indexfilenum=0		
+			commitnumber=`cat $directory/number.txt |tail -n1| cut -d '-' -f1`
+
+			if [ "$commitnumber" = "" ]
+			then
+				commitnumber=0					
+			else				
+				commitnumber=`expr "$commitnumber" + 1`								
+			fi	
+
+			for file in "$indexfile"/*
+			do
+				indexfilenum=`expr $indexfilenum + 1`	
+				filename=`echo "$file" |cut -d '/' -f3`
+				string=`find $commitdir -name $filename`
+			
+				if [ "$string" = "" ] 
+				then
+		
+					samefile $filename $string
+					if [ $? -eq 0 ]
+					then
+						commitfilenum=`expr $commitfilenum + 1`
+					else
+						cp $file $commitdir				
+						mv $commitdir/$filename $commitdir/"$filename+$commitnumber"					
+					
+					fi
+				else
+					cp $file $commitdir		
+					mv $commitdir/$filename $commitdir/"$filename+$commitnumber"
+				fi
+		
+			done
+
+
+			if [ $commitfilenum -eq $indexfilenum ]
+			then
+				echo "nothing to commit"
+				exit 0
+			fi
+
+			for file in "$indexfile"/*
+			do
+				filename=`echo "$file" |cut -d '/' -f3`
+				cp $file $commitdir		
+				mv $commitdir/$filename $commitdir/"$filename+$commitnumber"
+				cp $file $commitdir	
+
+			done
+			echo "Committed as commit $commitnumber"	
+			echo "$commitnumber-"$3"" >> $directory/number.txt
+
+
+
+
+		else
+			echo "usage: legit-commit [-a] -m commit-message"
+		fi
+	else
+		echo "usage: legit-commit [-a] -m commit-message"
+	fi
+
+
+#legit-commit -m
+elif [ $# -eq 2 ]
+then
+
+	if [ $1 != "-m" ]
+	then
+		echo "usage: legit-commit [-a] -m commit-message"
+		exit 1
+
+	else
+
+#whether the index is exits and have add something
+
+		inputstring=`echo "$2" | sed 's/^ *//'`
+		if [ "$inputstring" = "" ]
+		then
+			echo "usage: legit-commit [-a] -m commit-message"
+			exit 1
+		fi
+
+		if [ ! -d $indexfile ]
+		then
+			echo "nothing to commit"
+		 	exit 0
+		fi
+
+
+#readay to add it to .commit
+
+		if [ ! -d $commitdir ]
+		then
+			touch $directory/number.txt
+
+		fi
+
+		mkdir -p $commitdir	
+		
+		commitfilenum=0
+		indexfilenum=0		
+
+		commitnumber=`cat $directory/number.txt |tail -n1| cut -d '-' -f1`
+
+		if [ "$commitnumber" = "" ]
+		then
+			commitnumber=0					
+		else				
+			commitnumber=`expr "$commitnumber" + 1`								
+		fi	
+
+
+#check index with commit
+		
+		indexnum=`ls $indexfile/ | wc -l`
+		
+		if [ $indexnum -ne 0 ]
+		then
+			for file in "$indexfile"/*
+			do
+				indexfilenum=`expr $indexfilenum + 1`
+			
+				#filename=`echo "$file" |cut -d '/' -f3`
+				filename=`basename $file`
+			
+				string=`find $commitdir -name $filename`
+			
+		
+# != means find it, else, can be commited, because there are something new
+		
+				if [ "$string" != "" ] 
+				then
+		
+					samefile $indexfile/$filename $string
+					if [ $? -eq 0 ]
+					then	
+						commitfilenum=`expr $commitfilenum + 1`
+					else
+
+#they are not same, index file has been updated
+						cp $file $commitdir		
+						mv $commitdir/$filename $commitdir/"$filename+$commitnumber"					
+					
+					fi
+				else
+					cp $file $commitdir		
+					mv $commitdir/$filename $commitdir/"$filename+$commitnumber"
+				fi
+		
+			done
+		else
+
+			if [ $commitnumber -eq 0 ]
+			then
+				echo "nothing to commit"
+				exit 0
+
+			else
+				#echo "somthing"
+				flag=1
+				for file in `ls $commitdir|egrep -v '.*\+.*'`
+				do
+			
+					findintheindex=`find $indexfile -name $file`
+					if [ "$findintheindex" = "" ]
+					then
+						flag=0
+						rm -f $commitdir/$file
+					fi						
+				done
+
+				if [ $flag -eq 1 ]
+				then
+					echo "nothing to commit"
+					exit 0
+				else
+
+					#there is no file in the index,but need to commit					
+					for file in `ls $commitdir|egrep -v '.*\+.*'`
+					do
+						rm -f $commitdir/$file
+					done
+
+					#there is no this version file, but still be commited
+					echo "Committed as commit $commitnumber"	
+					echo "$commitnumber-$2" >> $directory/number.txt
+					exit 0
+				fi
+						
+			fi
+		fi
+
+		#echo "$commitfilenum +++++ $indexfilenum"
+
+		#if the file in the index is deleted, still can be commited, commit other file
+		
+
+		
+		
+			
+		if [ $commitfilenum -eq $indexfilenum ]
+		then
+
+			
+			flag=1
+			for file in `ls $commitdir|egrep -v '.*\+.*'`
+			do
+			
+				findintheindex=`find $indexfile -name $file`
+				if [ "$findintheindex" = "" ]
+				then
+					flag=0
+					rm -f $commitdir/$file
+				fi						
+			done
+			
+			if [ $flag -eq 1 ]
+			then
+				echo "nothing to commit"
+				exit 0
+			else
+				for file in "$indexfile"/*
+				do
+					#filename=`echo "$file" |cut -d '/' -f3`
+					filename=`basename $file`
+					cp $file $commitdir		
+					mv $commitdir/$filename $commitdir/"$filename+$commitnumber"
+					cp $file $commitdir	
+
+				done
+
+				echo "Committed as commit $commitnumber"	
+				echo "$commitnumber-$2" >> $directory/number.txt
+				exit 0
+			fi
+			
+		fi
+	
+	
+		for file in "$indexfile"/*
+		do
+			#filename=`echo "$file" |cut -d '/' -f3`
+			filename=`basename $file`
+			cp $file $commitdir		
+			mv $commitdir/$filename $commitdir/"$filename+$commitnumber"
+			cp $file $commitdir	
+
+		done
+
+		echo "Committed as commit $commitnumber"	
+		echo "$commitnumber-$2" >> $directory/number.txt
+		exit 0
+		
+
+																	
+	fi
+else
+	echo "usage: legit-commit [-a] -m commit-message"
+	exit 1
+fi
+
+
+
+
