@@ -1,0 +1,72 @@
+
+This file is automarked.
+
+Do not add extra lines to this file, just add your answers.
+
+For example if your answer to Q1 is: egrep Andrew words.txt
+Change the line that says Q1 answer to:
+
+Q1 answer: egrep Andrew words.txt
+
+
+1) Write an egrep command that will print all the lines in the file where the electorate begins with W.
+
+Q1 answer: egrep '.*Member for W.*' parliament.txt
+
+
+2) Write an egrep command that will list all the lines in the file where the MP's
+first name is Andrew.
+
+Q2 answer: egrep '(Hon |Mr |Ms |Dr |Mrs )+Andrew' parliament.txt
+
+
+3) Write an egrep command that will print all the lines in the file where the MP's
+surname (last name) ends in the letters 'll'.
+
+Q3 answer: egrep '.*ll ?[A-Z]*:' parliament.txt
+
+
+4) Write an egrep command that will print all the lines in the file where the MP's name and the electorate
+ends in the letter 'y'.
+
+Q4 answer: egrep 'y:.*y,.*' parliament.txt
+
+
+5) Write an egrep command that will print all the lines in the file where the MP's name or the electorate
+ends in the letter 'y'.
+
+Q5 answer: egrep '.*(y ?[A-Z]*:|y,).*' parliament.txt
+
+
+6) Write an egrep command to print all the lines in the file where there is any word in the
+MP's name or the electorate name that ends in ng.
+
+Q6 answer: egrep 'ng\b' parliament.txt
+
+
+7) Write an egrep command that will print all the lines in the file where the MP's
+surname (last name) both begins and ends with a vowel.
+
+Q7 answer: egrep ' [AEIOU][^ ]*[aeiou] ?[A-Z]*:' parliament.txt
+
+
+8) Most electorate have names that are a single word, e.g. Warringah, Lyons & Grayndler.
+A few electorates have multiple word names, for example, Kingsford Smith.
+Write an egrep command that will print all the lines in the file where the electorate name contains
+multiple words (separated by spaces or hyphens).
+
+Q8 answer: egrep '.*Member for [A-Z][a-z]*[ |-].*,' parliament.txt
+
+
+9) Write a shell pipeline which prints the 8 Australians states & territory in order of the number of MPs they have.
+It should print only the number of MPs, followed by the name of the states/territories.
+It should print them from fewest to most MPs.
+
+Q9 answer: cut -d , -f2 parliament.txt |sort|uniq -c| head -n 8|sort
+
+
+10) Challenge: The most common first name for an MP is Andrew.
+Write a shell pipeline which prints the 2nd most common MP first name.
+It should print this first name and only this first name.
+
+Q10 answer: cut -d : -f1 parliament.txt | sed 's/ [^ ]*$//' |sed 's/Mr //; s/Hon //; s/Ms //; s/Dr //; s/Mrs //'|sort | uniq -c | sort -n -r|head -2|tail -1| sed 's/.* //'
