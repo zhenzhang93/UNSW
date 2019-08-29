@@ -1,0 +1,28 @@
+
+.post {
+  display: flex;
+  overflow: hidden;
+  margin: 20px 0;
+  background-color: white;
+  border: 1px solid var(--reddit-grey);
+}
+
+.post .vote {
+  width: 100px;
+  background-color: var(--reddit-light-grey);
+}
+
+.post .content {
+  padding: 10px;
+}
+
+.post-title {
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.post-author {
+  margin: 5px 0;
+  font-size: 12px;
+  color: var(--reddit-blue);
+}

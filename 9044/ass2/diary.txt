@@ -1,0 +1,27 @@
+-------------------------------------------------------------------------------------
+Date     | Start | Stop  | Activity   |            Comments                         |
+------------------------------------------------------------------------------------
+27/07/19 | 19:00 | 24:00 | Coding     |implement the basic html and part of login  
+28/07/19 | 14:00 | 19:00 | Coding     |implement login and register function
+28/07/19 | 20:00 | 24:00 | Coding     |implement login and register function
+29/07/19 | 20:00 | 24:00 | Coding     |implement feed fuction
+30/07/19 | 14:00 | 19:00 | Coding     |implement show upvotes and comments function
+30/07/19 | 20:00 | 24:00 | Coding     |implement profile fuction
+31/07/19 | 14:00 | 18:00 | Coding     |implement most of the level 2 function
+31/07/19 | 21:00 | 24:00 | Coding     |finish level 2 function except Pagination 
+01/08/19 | 21:00 | 24:00 | debugging  |bug found in post
+02/08/19 | 15:00 | 18:00 | coding     |finish level 2 function
+02/08/19 | 19:30 | 24:00 | coding     |implement level 3 follow function
+03/08/19 | 14:30 | 18:00 | coding     |function to see my posts 
+03/08/19 | 19:30 | 24:00 | coding     |finish level 3 function except search and scroll
+04/08/19 | 14:30 | 18:30 | coding     |finish search function and update upvote function
+04/08/19 | 19:30 | 21:30 | coding     |live update the upvote 
+05/08/19 | 20:30 | 21:30 | debugging  |add subseddit to the post
+06/08/19 | 14:30 | 15:00 | debugging  |show votes in public/posts
+06/08/19 | 20:30 | 24:00 | coding     |add infinite scroll and update search function
+08/08/19 | 20:30 | 24:00 | debugging  |fix bug in live update
+10/08/19 | 14:30 | 17:00 | coding     |make some function more close to real reddit
+13/08/19 | 11:30 | 13:30 | debugging  |fix some bugs in post
+------------------------------------------------------------------------------------|
+Author: Sijie Hou, z5193712															|	
+------------------------------------------------------------------------------------|

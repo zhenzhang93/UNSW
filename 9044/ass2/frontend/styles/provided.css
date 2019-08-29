@@ -1,0 +1,264 @@
+/* base styles, feel free to edit */
+:root {
+  --reddit-blue: #0079D3;
+  --reddit-orange: #FF5700;
+  --reddit-grey: rgba(0, 0, 0, 0.0975);
+  --reddit-light-grey:  rgba(0, 0, 0, 0.041);
+  --reddit-bg-color: #f1f1f7;
+  --body-text-size: 12px;
+  --alt-text-color:  rgba(0, 0, 0, 0.65);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--reddit-bg-color);
+  height: 100%;
+  font-family: -apple-system, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+footer {
+  border-top: 1px solid var(--reddit-grey);
+  padding: 10px;
+  background-color: white;
+  min-height: 50px;
+  text-align: right;
+}
+
+.alt-text {
+  color: var(--alt-text-color);
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  min-height: 50px;
+  border-bottom: 1px solid var(--reddit-grey);
+}
+
+#logo {
+  color: white;
+  font-size: var(--body-text-size);
+  width: 40px;
+  height: 40px;
+  background-color: var(--reddit-orange);
+  border-radius: 50%;
+}
+
+#search {
+  background-color: var(--reddit-bg-color);
+  font: inherit;
+  font-size: var(--body-text-size);
+  border: none;
+  padding: 7.5px 15px;
+  outline: none;
+  border: 1px solid var(--reddit-grey);
+  border-radius: 4px;
+}
+
+#search::placeholder {
+  letter-spacing: 0.5px;
+  font-size: var(--body-text-size);
+}
+
+#search:focus {
+  background-color: white;
+  border-color: var(--reddit-blue);
+}
+
+.button {
+  border: 1px solid var(--reddit-blue);
+  border-radius: 4px;
+  text-transform: uppercase;
+  padding: 7.5px 15px;
+  font-weight: bold;
+}
+
+.button-primary {
+  color: var(--reddit-blue);
+}
+
+.button-secondary {
+  background-color: var(--reddit-blue);
+  color: white;
+}
+
+.banner > *,
+footer > * {
+  margin: 10px 25px;
+}
+
+.nav {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav-item {
+  margin: auto;
+  padding: 5px;
+  display: inline;
+  list-style-type: none;
+}
+
+#feed {
+  min-width: 500px;
+  max-width: 800px;
+  width: 80%;
+  margin: 20px auto;
+  padding: 0;
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.feed-title {
+  font-weight: normal;
+  margin: 0;
+}
+
+#input-box {
+  display:none;
+  padding: 20px 30px;
+  position:absolute;
+  left:50%;
+  width:200px;
+}
+
+
+
+
+
+
+/* Add your styles here */
+
+
+/*reference from w3c*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+
+  
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#mytexttitle {
+  width: 80%;
+  height: 10%;
+}
+
+#mytextarea {
+  width: 80%;
+  height: 200px;
+}
+
+#mytextarea_button{
+
+    margin-bottom: 5%;
+    margin-left: 5%;
+  
+}
+
+#myuploadimg{
+
+  margin-bottom: 5%;
+  margin-left: 10%;
+}
+
+#myuploadimgbutton{
+
+  margin-bottom: 10%;
+  margin-right: 5%;
+}
+
+
+
+#listmodalcontent {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; 
+}
+
+
+.listdiv{
+
+  float: left;
+  width: 100%;
+}
+
+.post-time{
+  
+  font-size: 20px;
+  color: var(--reddit-orange);
+  margin-left: 150px;
+  
+}
+
+
+p {
+  color: darkorchid;
+}
+
+#myModalcontent div {
+  color: darkslategrey;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
