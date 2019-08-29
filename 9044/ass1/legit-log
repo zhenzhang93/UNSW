@@ -1,0 +1,36 @@
+#!/bin/dash
+
+directory=".legit"
+place="$directory/.commit"
+
+#if the .legit does not exist or there is no commit
+if [ ! -d "$directory" ]
+then
+	echo "legit-log: error: no .legit directory containing legit repository exists"
+	exit 1
+fi
+
+
+if [ ! -d "$place" ]
+then
+	echo "legit-log: error: your repository does not have any commits yet"
+	exit 1
+fi	
+
+if [ $# -gt 0 ]
+then
+	echo "usage: legit-log"
+	exit 1
+fi	
+
+#get the log txt from the number.txt
+
+cat $directory/number.txt |sort -r | while read line
+do
+	echo "$line" | sed 's/-/ /'
+done
+
+
+
+
+

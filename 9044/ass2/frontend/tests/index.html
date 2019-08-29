@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- styling for the test results -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.1.0/mocha.min.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../styles/provided.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../styles/post.css" />
+</head>
+
+<body>
+    <!-- container that will display test results -->
+    <div id="mocha"></div>
+
+    <!-- mocha (test runner) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/3.1.0/mocha.min.js"></script>
+
+    <!-- chai (assertion library) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.min.js"></script>
+    <script>            // setup test helpers
+        const { should, expect } = chai;
+        mocha.setup('bdd');
+    </script>
+    <script type="module" crossorigin="anonymous">
+        import './index.test.js';
+        // run tests
+        mocha.run();
+    </script>
+</body>
+
+</html>

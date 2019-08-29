@@ -1,0 +1,223 @@
+#!/usr/bin/perl -w
+
+
+use File::Copy::Recursive qw(dircopy fcopy);
+use File::Basename;
+use File::Copy;
+
+$directory = ".legit";
+
+$commitdir="$directory/.commit";
+
+$branchdir="$directory/.branch";
+
+mkdir $branchdir;
+
+sub copyAllFile{
+
+	my $branch = $_[0];
+
+#	mkdir "$branchdir/$branch";
+#	$dir="$branchdir/$branch/index";
+	
+#	mkdir $dir;
+
+#	foreach my $file(glob "$directory/.commit/*"){
+#		$basename = basename("$file");
+#		if( $basename =~ /\+/){
+#			next;
+#		}
+#		copy($file,"$dir/$basename");
+
+#	}
+	dircopy("$directory/index","$branchdir/$branch/index");	
+	
+}
+
+
+
+if ( ! -d  $directory){
+	print "legit-branch: error: no .legit directory containing legit repository exists\n";
+	exit 1
+}
+
+if ( ! -d  $commitdir){
+
+	print "legit-branch: error: your repository does not have any commits yet\n";
+	exit 1
+}
+
+
+
+
+if(@ARGV eq 0){
+	open (F,'<',"$directory/branches.txt");
+	chomp(@content = <F>);
+	@content=sort @content;
+
+	foreach(@content){
+		print "$_\n";
+	}	
+	close F;
+	exit 0;
+}
+
+if(@ARGV ge 3){
+	print "usage: legit-branch [-d] <branch>\n";
+	exit 1;
+}
+
+
+if(@ARGV eq 2){
+	
+	if ($ARGV[0] ne '-d' and $ARGV[0] ne '--'){
+		print "usage: legit-branch [-d] <branch>\n";
+		exit 1;
+	}
+	if ($ARGV[0] eq '--'){
+
+#only contains number is invalid
+
+		if ($ARGV[1] =~ /[^A-Za-z0-9_\.\-]/ or $ARGV[1] =~ /^[^A-Za-z0-9]/ or $ARGV[1] !~ /[A-Za-z]/ ){		
+			print "legit-branch: error: invalid branch name '$ARGV[1]'\n";
+			exit 1;
+		}
+#treat as create new branch
+		open (F, '<', "$directory/branches.txt");
+		while(my $line = <F>){
+			if ($line =~ /$ARGV[1]/){
+				print "legit-branch: error: branch '$ARGV[1]' already exists\n";
+				exit 1;
+			}					
+				
+		}
+		close F;
+		open (F,'>>',"$directory/branches.txt");	
+		print F "$ARGV[1]\n";
+		close F;
+		exit 0;
+	}
+
+
+#-d branchname
+
+	if ($ARGV[0] eq '-d'){
+
+		if ($ARGV[1] =~ /[^A-Za-z0-9_\.\-]/ or $ARGV[1] =~ /^[^A-Za-z0-9]/ or $ARGV[1] !~ /[A-Za-z]/ ){		
+			print "legit-branch: error: invalid branch name '$ARGV[1]'\n";
+			exit 1;
+		}
+		open (F, '<', "$directory/branches.txt");
+		$flag = 0;
+		while(my $line = <F>){
+			chomp $line;
+			if ($line eq "$ARGV[1]"){
+				$flag = 1;
+				last;
+			}					
+				
+		}
+		close F;
+		if ($flag eq 0 ){
+			print "legit-branch: error: branch '$ARGV[1]' does not exist\n";
+			exit 1;
+		}
+
+#otherwise judge it can be deleted.
+		if ($ARGV[1] eq 'master'){
+			print "legit-branch: error: can not delete branch 'master'\n";
+			exit 1;
+		}
+
+
+
+#delete the branch
+		open (F, '<', "$directory/branches.txt");
+		@lines=();
+		while(my $line = <F>){
+			chomp $line;
+			if ($line eq "$ARGV[1]"){
+				next;
+			}
+			push @lines,"$line\n";				
+		
+		}
+		close F;
+		open ($f, '>', "$directory/branches.txt");
+
+		foreach $line(@lines){
+			print $f $line;
+		}
+
+		close $f;
+		print "Deleted branch '$ARGV[1]'\n";
+		exit 0;
+		
+	}
+
+}
+
+#create a new branch
+
+if(@ARGV eq 1){
+
+	if ($ARGV[0] =~ /[^A-Za-z0-9_\.\-]/ or $ARGV[0] =~ /^[^A-Za-z0-9]/ or $ARGV[0] !~ /[A-Za-z]/ ){		
+		print "legit-branch: error: invalid branch name '$ARGV[0]'\n";
+		exit 1;
+	}
+	open (F, '<', "$directory/branches.txt");
+	while(my $line = <F>){
+		if ($line =~ /$ARGV[0]/){
+			print "legit-branch: error: branch '$ARGV[0]' already exists\n";
+			exit 1;
+		}					
+				
+	}
+	close F;
+	my @lines=();
+	open (F, '<', "$directory/branches.txt");
+	while(my $line = <F>){
+		push @lines,$line;				
+	}
+	close F;
+
+	open (F,'>',"$directory/branches.txt");	
+	print F "$ARGV[0]\n";
+	close F;
+
+	open (F,'>>',"$directory/branches.txt");	
+	foreach my $line(@lines){
+		print F $line;
+	}
+	close F;
+
+	copyAllFile("$ARGV[0]");
+
+	exit 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Pretty Pictures</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
+      <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/basic.css"/>
+      <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/async.css"/>
+   </head>
+   <body>
+      <main role="main" id="main">
+         <h1>Fetch some images</h1>
+         <p>Use the DOM fetch API to request 5 images from <code>https://picsum.photos/200/300/?random</code>
+            and add them to the DOM output element (element with id output) in
+            their own individual div.</p>
+          <p>
+            Note that the api link redirects to a random image so after a successful fetch
+            the response object's "url" field will be the image url.
+          </p>
+          <p>
+            This should everytime the "more!" button is pressed. Everytime the
+            button is pressed the previous posts in the div should also be
+            cleared, i.e there should only ever be 5 posts on the screen
+            at any time.
+          </p>
+          <p>
+            This may take a while so display a loading message while you make
+            all your requests, and remove it once the posts have been rendered.
+            (think about how you might be able to do this while not sacrificing any speed
+            given what you learnt about promises last week)</p>
+          <p>
+            A <b>optional</b> css challange is to, rather then displaying a boring message saying "loading", display a animation
+            such as <a href="https://camo.githubusercontent.com/60d741b9bfc3081d1c9f4aa6297ba82db8b706b7/687474703a2f2f692e696d6775722e636f6d2f4c4475485a65662e676966">this</a>
+          </p>
+          <p>
+            Each div must have the class <code>img-post</code>.
+            Display the post image and underneath the time it was fetched.
+            An example of the sort of output div we expect is below but feel
+            free to get more creative
+          </p>
+         <div style="width: 100%; display: flex; align-items: center; justify-content: center">
+           <div class="img-post">
+             <img src="https://images.unsplash.com/photo-1538579110458-c0339544123a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=65c36b66325bcf3cd4be4e5b650ce168"/>
+             <p>Fetched at 21:41</p>
+           </div>
+         </div>
+         <br><br>
+         <div id="output">
+           <!-- stolen from https://loading.io/ -->
+            <svg id="loading" width="6%" style="margin-left: 47%; display: none" height="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-rolling"><circle cx="50" cy="50" fill="none" ng-attr-stroke="{{config.color}}" ng-attr-stroke-width="{{config.width}}" ng-attr-r="{{config.radius}}" ng-attr-stroke-dasharray="{{config.dasharray}}" stroke="#3e6d8d" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138" transform="rotate(71.7955 50 50)"><animateTransform attributeName="transform" type="rotate" calcMode="linear" values="0 50 50;360 50 50" keyTimes="0;1" dur="1s" begin="0s" repeatCount="indefinite"></animateTransform></circle></svg></div>
+         <br><br>
+         <div style="width: 100%; display: flex; align-items: center; justify-content: center">
+           <button id="more" class="btn btn-success"> More! </button>
+         </div>
+      </main>
+      <script type="module">
+          import runApp from './fetch.js';
+  
+          runApp();
+      </script>
+   </body>
+</html>

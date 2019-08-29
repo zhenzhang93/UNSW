@@ -1,0 +1,19 @@
+{
+    "id": 0,
+    "meta": {
+      "author": "string",
+      "subseddit": "string",
+      "text": "string",
+      "published": "string",
+      "upvotes": [
+        0
+      ],
+      "comments": [
+        {
+          "comment": "Cute photo!"
+        }
+      ]
+    },
+    "thumbnail": "string",
+    "image": "string"
+  }

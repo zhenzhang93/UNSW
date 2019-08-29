@@ -1,0 +1,20 @@
+[
+  {
+    "username": "baz",
+    "name": "Barry",
+    "id"  : 1,
+    "posts": [1]
+  },
+  {
+    "username": "a_cop",
+    "name": "Not a cop",
+    "id"  : 2,
+    "posts": [2]
+  },
+  {
+    "username": "bad_boy",
+    "name": "Good Boy",
+    "id"  : 3,
+    "posts": [3]
+  }
+]

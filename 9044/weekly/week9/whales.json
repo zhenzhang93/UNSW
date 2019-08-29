@@ -1,0 +1,502 @@
+[
+    {
+        "date": "19/07/18",
+        "how_many": 27,
+        "species": "Blue whale"
+    },
+    {
+        "date": "30/03/18",
+        "how_many": 20,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "10/07/18",
+        "how_many": 4,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "26/07/18",
+        "how_many": 25,
+        "species": "Fin whale"
+    },
+    {
+        "date": "05/07/18",
+        "how_many": 38,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "07/02/18",
+        "how_many": 30,
+        "species": "Sei whale"
+    },
+    {
+        "date": "27/09/18",
+        "how_many": 3,
+        "species": "Striped dolphin"
+    },
+    {
+        "date": "19/12/17",
+        "how_many": 39,
+        "species": "Dwarf minke whale"
+    },
+    {
+        "date": "08/03/18",
+        "how_many": 20,
+        "species": "Indo-Pacific humpbacked dolphin"
+    },
+    {
+        "date": "12/03/18",
+        "how_many": 25,
+        "species": "Southern right whale"
+    },
+    {
+        "date": "13/09/18",
+        "how_many": 27,
+        "species": "Southern right whale"
+    },
+    {
+        "date": "11/06/18",
+        "how_many": 12,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "04/02/18",
+        "how_many": 29,
+        "species": "Spinner dolphin"
+    },
+    {
+        "date": "01/04/18",
+        "how_many": 34,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "09/10/18",
+        "how_many": 19,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "08/07/18",
+        "how_many": 27,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "11/01/18",
+        "how_many": 37,
+        "species": "Dwarf sperm whale"
+    },
+    {
+        "date": "25/02/18",
+        "how_many": 17,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "28/10/17",
+        "how_many": 15,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "22/02/18",
+        "how_many": 31,
+        "species": "Orca"
+    },
+    {
+        "date": "12/08/18",
+        "how_many": 21,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "24/08/18",
+        "how_many": 5,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "11/01/18",
+        "how_many": 14,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "04/11/17",
+        "how_many": 14,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "29/04/18",
+        "how_many": 30,
+        "species": "Orca"
+    },
+    {
+        "date": "24/02/18",
+        "how_many": 25,
+        "species": "Indo-Pacific humpbacked dolphin"
+    },
+    {
+        "date": "28/06/18",
+        "how_many": 16,
+        "species": "Striped dolphin"
+    },
+    {
+        "date": "27/11/17",
+        "how_many": 3,
+        "species": "Orca"
+    },
+    {
+        "date": "23/09/18",
+        "how_many": 10,
+        "species": "Short-finned pilot whale"
+    },
+    {
+        "date": "24/04/18",
+        "how_many": 12,
+        "species": "Southern right whale"
+    },
+    {
+        "date": "05/02/18",
+        "how_many": 1,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "15/12/17",
+        "how_many": 15,
+        "species": "Sei whale"
+    },
+    {
+        "date": "25/07/18",
+        "how_many": 2,
+        "species": "Humpback whale"
+    },
+    {
+        "date": "06/10/18",
+        "how_many": 19,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "12/04/18",
+        "how_many": 4,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "19/06/18",
+        "how_many": 26,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "21/06/18",
+        "how_many": 18,
+        "species": "Short-finned pilot whale"
+    },
+    {
+        "date": "27/01/18",
+        "how_many": 17,
+        "species": "Dwarf sperm whale"
+    },
+    {
+        "date": "23/03/18",
+        "how_many": 13,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "29/12/17",
+        "how_many": 25,
+        "species": "Fin whale"
+    },
+    {
+        "date": "04/08/18",
+        "how_many": 25,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "30/12/17",
+        "how_many": 35,
+        "species": "Short-finned pilot whale"
+    },
+    {
+        "date": "21/05/18",
+        "how_many": 7,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "18/04/18",
+        "how_many": 31,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "19/12/17",
+        "how_many": 31,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "17/07/18",
+        "how_many": 19,
+        "species": "Long-finned pilot whale"
+    },
+    {
+        "date": "06/02/18",
+        "how_many": 38,
+        "species": "Sei whale"
+    },
+    {
+        "date": "19/06/18",
+        "how_many": 35,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "13/01/18",
+        "how_many": 15,
+        "species": "Blue whale"
+    },
+    {
+        "date": "14/04/18",
+        "how_many": 32,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "02/03/18",
+        "how_many": 31,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "23/06/18",
+        "how_many": 10,
+        "species": "Blue whale"
+    },
+    {
+        "date": "25/02/18",
+        "how_many": 3,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "24/09/18",
+        "how_many": 19,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "28/08/18",
+        "how_many": 30,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "04/07/18",
+        "how_many": 34,
+        "species": "Orca"
+    },
+    {
+        "date": "14/03/18",
+        "how_many": 26,
+        "species": "Dwarf sperm whale"
+    },
+    {
+        "date": "04/09/18",
+        "how_many": 8,
+        "species": "Orca"
+    },
+    {
+        "date": "22/06/18",
+        "how_many": 8,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "05/11/17",
+        "how_many": 6,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "14/11/17",
+        "how_many": 37,
+        "species": "Fin whale"
+    },
+    {
+        "date": "08/05/18",
+        "how_many": 1,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "07/06/18",
+        "how_many": 2,
+        "species": "Dwarf minke whale"
+    },
+    {
+        "date": "24/01/18",
+        "how_many": 22,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "10/08/18",
+        "how_many": 35,
+        "species": "Indo-Pacific humpbacked dolphin"
+    },
+    {
+        "date": "07/11/17",
+        "how_many": 27,
+        "species": "Blue whale"
+    },
+    {
+        "date": "24/02/18",
+        "how_many": 39,
+        "species": "Sei whale"
+    },
+    {
+        "date": "23/01/18",
+        "how_many": 14,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "25/06/18",
+        "how_many": 1,
+        "species": "Sei whale"
+    },
+    {
+        "date": "28/12/17",
+        "how_many": 6,
+        "species": "Dwarf sperm whale"
+    },
+    {
+        "date": "30/05/18",
+        "how_many": 12,
+        "species": "Long-finned pilot whale"
+    },
+    {
+        "date": "12/07/18",
+        "how_many": 11,
+        "species": "Long-finned pilot whale"
+    },
+    {
+        "date": "11/04/18",
+        "how_many": 26,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "03/12/17",
+        "how_many": 8,
+        "species": "Dwarf sperm whale"
+    },
+    {
+        "date": "27/02/18",
+        "how_many": 38,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "15/07/18",
+        "how_many": 41,
+        "species": "Short-finned pilot whale"
+    },
+    {
+        "date": "17/05/18",
+        "how_many": 40,
+        "species": "Short-finned pilot whale"
+    },
+    {
+        "date": "17/08/18",
+        "how_many": 35,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "09/12/17",
+        "how_many": 6,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "23/03/18",
+        "how_many": 6,
+        "species": "Pygmy right whale"
+    },
+    {
+        "date": "16/07/18",
+        "how_many": 5,
+        "species": "Fin whale"
+    },
+    {
+        "date": "21/09/18",
+        "how_many": 35,
+        "species": "Bryde's whale"
+    },
+    {
+        "date": "02/05/18",
+        "how_many": 38,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "22/02/18",
+        "how_many": 10,
+        "species": "Fin whale"
+    },
+    {
+        "date": "09/02/18",
+        "how_many": 16,
+        "species": "Short-finned pilot whale"
+    },
+    {
+        "date": "24/11/17",
+        "how_many": 12,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "05/11/17",
+        "how_many": 31,
+        "species": "Indo-Pacific humpbacked dolphin"
+    },
+    {
+        "date": "21/07/18",
+        "how_many": 23,
+        "species": "Humpback whale"
+    },
+    {
+        "date": "08/04/18",
+        "how_many": 28,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "30/05/18",
+        "how_many": 6,
+        "species": "Sei whale"
+    },
+    {
+        "date": "29/03/18",
+        "how_many": 14,
+        "species": "Common dolphin"
+    },
+    {
+        "date": "18/06/18",
+        "how_many": 35,
+        "species": "Indo-Pacific humpbacked dolphin"
+    },
+    {
+        "date": "19/11/17",
+        "how_many": 24,
+        "species": "Sei whale"
+    },
+    {
+        "date": "06/11/17",
+        "how_many": 12,
+        "species": "Fin whale"
+    },
+    {
+        "date": "29/11/17",
+        "how_many": 11,
+        "species": "Orca"
+    },
+    {
+        "date": "19/04/18",
+        "how_many": 4,
+        "species": "Coastal bottlenose dolphin"
+    },
+    {
+        "date": "12/02/18",
+        "how_many": 33,
+        "species": "Pygmy sperm whale"
+    },
+    {
+        "date": "06/01/18",
+        "how_many": 34,
+        "species": "Humpback whale"
+    },
+    {
+        "date": "06/10/18",
+        "how_many": 35,
+        "species": "Spinner dolphin"
+    },
+    {
+        "date": "03/04/18",
+        "how_many": 35,
+        "species": "Fin whale"
+    }
+]

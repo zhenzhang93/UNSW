@@ -1,0 +1,22 @@
+$ legit-init
+Initialized empty legit repository in .legit
+$ echo hello >a
+$ legit-add a
+$ legit-commit -m commit-A
+Committed as commit 0
+$ legit-branch b1
+$ echo world >>a
+$ legit-checkout b1
+Switched to branch 'b1'
+$ legit-status
+a - file changed, changes not staged for commit
+$ legit-checkout master
+Switched to branch 'master'
+$ legit-add a
+$ legit-status
+a - file changed, changes staged for commit
+$ legit-checkout b1
+Switched to branch 'b1'
+*** TEST STOPPED - INCORECT FILE: file 'a' has incorrect contents
+
+
