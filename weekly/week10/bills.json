@@ -1,0 +1,26 @@
+[
+  [
+     {"name": "Rice", "price": "$4.29"},
+     {"name": "Butter", "price": "$4.00"}
+  ],
+  [
+     {"name": "Cheese", "price": "$8.82"},
+     {"name": "Rice", "price": "$6.84"},
+     {"name": "Pasta", "price": "$7.87"}
+  ],
+  [
+     {"name": "Peanut Butter", "price": "$6.93"},
+     {"name": "Bread", "price": "$3.32"},
+     {"name": "Noodles", "price": "$4.71"}
+  ],
+  [
+     {"name": "Cheese", "price": "$4.60"},
+     {"name": "Rice", "price": "$8.23"},
+     {"name": "Bread", "price": "$5.99"},
+     {"name": "Pasta", "price": "$0.11"},
+     {"name": "Ramen", "price": "$0.98"}
+  ],
+  [
+     {"name": "Noodles", "price": "$0.38"}
+  ]
+]

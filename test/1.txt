@@ -1,0 +1,10 @@
+root:ZHolHAHZw8As2:0:0:root:/root:/bin/bash
+jas:iaiSHX49Jvs8.:100:100:John Shepherd:/home/jas:/bin/bash
+andrewt:rX9KwSSPqkLyA:101:101:Andrew Taylor:/home/andrewt:/bin/cat
+postgres::997:997:PostgreSQL Admin:/usr/local/pgsql:/bin/bash
+oracle::999:998:Oracle Admin:/home/oracle:/bin/bash
+cs2041:rX9KwSSPqkLyA:2041:2041:COMP2041 Material:/home/cs2041:/bin/bash
+cs3311:mLRiCIvmtI9O2:3311:3311:COMP3311 Material:/home/cs3311:/bin/bash
+cs9311:fIVLdSXYoVFaI:9311:9311:COMP9311 Material:/home/cs9311:/bin/bash
+cs9314:nTn.JwDgZE1Hs:9314:9314:COMP9314 Material:/home/cs9314:/bin/bash
+cs9315:sOMXwkqmFbKlA:9315:9315:COMP9315 Material:/home/cs9315:/bin/bash
