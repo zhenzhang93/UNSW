@@ -1,0 +1,336 @@
+#!/usr/bin/perl -w
+
+use File::Copy;
+use File::Copy::Recursive qw(dircopy fcopy);
+use File::Basename;
+use File::Compare;
+
+$directory = ".legit";
+
+$commitdir="$directory/.commit";
+
+$branchdir="$directory/.branch";
+
+
+sub makeLastBranch{
+	open (F, '<', "$directory/branches.txt");
+	my @lines=();
+	my $branch = $_[0];
+	while(my $line = <F>){
+		if ($line =~ /$branch/){
+			$line = "";				
+		}
+		push @lines,$line;
+	}			
+	close F;
+
+	open (my $f, '>', "$directory/branches.txt");
+
+	foreach my $line(@lines){
+		print $f $line;
+	}
+	close $f;
+	open (my $newf, '>>', "$directory/branches.txt");
+	print $newf "$branch\n";	
+	
+	close $newf;		
+}
+
+sub copyAllFile{
+	my $branch = $_[0];
+	dircopy("$directory/index","$branchdir/$branch/index");
+}
+
+
+if ( ! -d  $directory){
+	print "legit-branch: error: no .legit directory containing legit repository exists\n";
+	exit 1
+}
+
+if ( ! -d  $commitdir){
+
+	print "legit-branch: error: your repository does not have any commits yet\n";
+	exit 1
+}
+
+
+if(@ARGV ne 1){
+	print "usage: legit-checkout <branch>\n";
+	exit 1;
+
+}
+
+$flag = 1;
+
+open (F, '<', "$directory/branches.txt") or die;
+while(my $line = <F>){
+	if ($line =~ /$ARGV[0]/){
+		$flag = 0;
+		last;
+	}						
+}
+
+#cannot find the branch
+close F;
+if ($flag eq 1 ){
+	print "legit-checkout: error: unknown branch '$ARGV[0]'\n";
+	exit 1;
+}
+
+
+open (F, '<', "$directory/branches.txt") or die;
+my @arr=<F>;
+close F;
+$last = $arr[$#arr];
+
+#if is already in this branch
+if($last =~ "$ARGV[0]"){
+	print "Already on '$ARGV[0]'\n";
+	exit 0;
+}
+
+
+#switched to braranch;
+
+if("$ARGV[0]" ne "master"){
+
+	mkdir "$branchdir/$ARGV[0]";
+
+	chomp $last;
+
+
+#delete file that belongs to another branch
+
+	if ("$last" eq "master"){
+		$temppath = "$directory/index";
+
+		foreach my $file(glob "$temppath/*"){
+
+			my $filebasename = basename("$file");
+
+			if ( ! -e "$branchdir/$ARGV[0]/index/$filebasename"){
+					
+				unlink $filebasename;
+			}
+	
+		}
+
+		$same = 1;
+		my $count = 0;
+		my $filecount=0;
+
+#check the file in the index is the same with the branch index
+
+		foreach my $file1 (glob "$branchdir/$ARGV[0]/index/*"){
+			$filecount++;
+			my $filebasename = basename("$file1");
+			if(-e "$temppath/$filebasename"){
+				if (compare("$file1","$temppath/$filebasename")==0){
+					
+					$count++;
+				}
+			}
+
+		}
+		if ($count == $filecount){
+			$same=0;
+		}
+	}
+
+	else{
+		$same = 1;
+
+		$temppath = "$branchdir/$last/index";
+	
+		
+		foreach my $file(glob "$temppath/*"){
+
+			my $filebasename = basename("$file");
+
+			if ( ! -e "$directory/index/$filebasename"){
+				
+				unlink $filebasename;
+			}
+
+		}
+
+
+	}
+
+
+		
+
+#make it in the last line of branches.txt
+
+	makeLastBranch("$ARGV[0]");
+
+#recover the file from branch index
+
+
+
+	if ($same eq 1){
+
+		foreach my $file(glob "$branchdir/$ARGV[0]/index/*"){
+
+			my $filebasename = basename("$file");
+
+			if ($last ne "master"){
+	
+#there are something add to the last brach,but not commit
+				if(compare("$branchdir/$last/index/$filebasename","$directory/.commit/$filebasename")!=0){
+
+#there are something add to the branch and has commited      or no changes in this branch
+
+					if(compare("$file","$directory/.commit/$filebasename")==0){	
+
+						if(compare($filebasename,$file)!=0){
+							
+							
+							copy($file,$filebasename);			
+						}	
+					}
+
+				}
+
+				else{
+					copy($file,$filebasename);
+				}
+
+
+			}
+
+			else{
+
+#there are something add to master,but not commit   or other brach has made commit 
+
+				if(compare("$temppath/$filebasename","$directory/.commit/$filebasename")!=0){
+					
+#it has been commited by this branch.
+					if (compare("$file","$directory/.commit/$filebasename") == 0){
+			
+						if (! -e "$temppath/$filebasename"){								
+							copy($file,$filebasename);
+						}
+
+						elsif(compare($file,"$temppath/$filebasename") ==0){										
+							copy($file,$filebasename);
+						}
+						
+						else{
+							if (compare($filebasename,$file) != 0 and compare($filebasename,"$temppath/$filebasename")==0){
+
+#check if there is a commit
+
+								copy($file,$filebasename);
+								
+							}
+							
+						}
+
+					}					
+					
+					else{
+						copy("$temppath/$filebasename",$filebasename);		
+					}
+
+				}
+				else{
+					copy($file,$filebasename);
+				}
+
+			}
+
+		}
+	}
+
+	
+
+
+#not commit yet
+
+
+
+
+
+
+	#copy all the index file to ./branch/branchname/index, It should be done int the branch 
+
+	#copyAllFile("$ARGV[0]");
+
+
+	print "Switched to branch '$ARGV[0]'\n";
+
+
+}
+
+
+
+#need to delete the file in current dir. switched to the master
+
+else{
+	chomp $last;
+	my $temppath = "$branchdir/$last/index";
+	
+	foreach my $file(glob "$temppath/*"){
+
+		my $filebasename = basename("$file");
+	
+		if ( ! -e "$directory/index/$filebasename"){
+						
+			$filebasename = basename("$file");
+		
+			unlink $filebasename;
+		}
+		
+	}
+
+
+#means there is no add, what changes should be stayed.
+
+	$same = 1;
+	my $count = 0;
+	my $filecount=0;
+	foreach my $file1 (glob "$directory/index/*"){
+		$filecount++;
+		my $filebasename = basename("$file1");
+		if(-e "$temppath/$filebasename"){
+			if (compare("$file1","$temppath/$filebasename")==0){
+				$count++;
+			}
+		}
+
+	}
+	if ($count == $filecount){
+		$same=0;
+	}
+
+
+	makeLastBranch("$ARGV[0]");
+
+
+#recover the file;
+
+	
+	if ($same eq 1){
+
+		foreach my $file(glob "$directory/index/*"){
+
+			my $filebasename = basename("$file");
+			
+			copy($file,$filebasename);
+		
+	
+		}
+	
+	}
+
+	print "Switched to branch '$ARGV[0]'\n";
+
+
+}
+
+
+
+
+
+

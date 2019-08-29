@@ -1,0 +1,218 @@
+#!/bin/dash
+
+directory=".legit"
+commitdir="$directory/.commit"
+indexdir="$directory/index"
+
+
+#check it is same file
+samefile(){
+	
+	diff $1 $2 > /dev/null
+	if [ $? -eq 0 ]
+	then
+		return 0
+	else
+		return 1
+	fi
+}
+
+#check the file name is valid
+judgevalid(){
+
+	if [ "$1" = "" ]
+	then
+		return 1
+	fi
+
+	if echo "$1" | egrep -q "^[^a-zA-Z0-9]"
+	then
+		return 1
+	fi
+
+	if echo "$1" | egrep -q "[^a-zA-Z0-9\._\-]"
+	then
+		return 1
+	fi	
+	return 0
+}
+
+
+#no commit or .legit
+if [ ! -d $directory ]
+then
+	echo "legit-status: error: no .legit directory containing legit repository exists"
+	exit 1
+fi
+
+
+if [ ! -d "$commitdir" ]
+then
+	echo "legit-status: error: your repository does not have any commits yet"
+	exit 1
+fi	
+
+
+#need file to record the filename in the current dir, index and commit
+
+cur=`ls`
+commit=`ls $commitdir`
+index=`ls $indexdir`
+
+
+touch .legit/temp
+
+temppath=".legit/temp"
+
+
+#add all filenames into the temp
+for i in $cur
+do
+#if the name is invalid, then next.
+	judgevalid $i
+	if [ $? -eq 0 ]
+	then
+		filename=`cat $temppath | egrep $i`
+		if [ "$filename" = "" ]
+		then
+			echo "$i" >> $temppath
+		else
+			continue
+		fi
+	fi
+done
+
+#check the filename in the commit,current dir and index.
+for i in $commit
+do
+	
+	if echo "$i" | egrep -v -q '\+'
+	then
+		filename=`cat $temppath | egrep $i`
+		if [ "$filename" = "" ]
+		then
+			echo "$i" >> $temppath
+		else
+			continue
+		fi
+	fi
+done
+
+
+
+for i in $index
+do
+	
+
+	filename=`cat $temppath | egrep $i`
+	if [ "$filename" = "" ]
+	then
+		echo "$i" >> $temppath
+	else
+		continue
+	fi
+	
+done
+
+
+
+
+#--------------------------------------------------------------------
+for file in `cat $temppath|sort`
+do	
+	findcurfile=`find $file 2>/dev/null`
+
+#current dir does not have this file	
+
+	if [ "$findcurfile" = "" ]
+	then
+		findindexfile=`find $indexdir -name $file`
+		if [ "$findindexfile" = "" ]
+		then
+
+#file deleted in both cur and index
+
+			echo "$file - deleted"
+		else
+			findcommitfile=`find $commitdir -name $file`
+			
+			if [ "$findcommitfile" = "" ]
+			then	
+#have not committed yet
+				echo "$file - added to index"
+			else
+#only deleted in current dir
+				echo "$file - file deleted"
+			fi
+		fi
+		
+	else
+
+		findindexfile=`find $indexdir -name $file`
+
+		if [ "$findindexfile" = "" ]
+		then
+			echo "$file - untracked"
+		else
+
+		
+
+#check index with current dir
+
+			samefile $findindexfile $file
+			if [ $? -eq 0 ]
+			then
+				findcommitfile=`find $commitdir -name $file`
+				if [ "$findcommitfile" = "" ]
+				then
+
+#it means it does not commit yet
+					echo "$file - added to index"
+				else
+					samefile $findcommitfile $findindexfile
+
+					if [ $? -eq 0 ]
+					then	
+
+						echo "$file - same as repo"
+					else
+						echo "$file - file changed, changes staged for commit"
+					fi
+
+				fi
+			else
+
+
+
+#index file is not same with current dir
+			
+				findcommitfile=`find $commitdir -name $file`
+				if [ "$findcommitfile" = "" ]
+				then
+					echo "$file - added to index"
+				else
+					samefile $findcommitfile $findindexfile
+
+					if [ $? -eq 0 ]
+					then	
+
+#commit is the same with index file
+						echo "$file - file changed, changes not staged for commit"
+					else
+						echo "$file - file changed, different changes staged for commit"
+					fi
+
+				fi
+		
+		
+			fi
+		fi
+
+	fi
+
+done
+
+rm -f $temppath
+
+
+

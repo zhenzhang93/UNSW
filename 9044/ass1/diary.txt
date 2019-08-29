@@ -1,0 +1,35 @@
+-------------------------------------------------------------------------------------
+Date     | Start | Stop  | Activity   |            Comments                         |
+------------------------------------------------------------------------------------|
+26/06/19 | 14:00 | 18:00 | Coding     | implement init and add function             | 
+26/06/19 | 20:00 | 23:00 | Coding     | implement complete legit-commit -m function |
+27/06/19 | 21:00 | 24:00 | Coding     | complete legit-commit -m function		    |
+28/06/19 | 00:00 | 01:00 | Coding     | complete legit-commit -m function			|
+28/06/19 | 14:00 | 15:30 | Debugging  | Bug found in legit-commit       			|
+28/06/19 | 15:30 | 18:00 | Coding  	  | implement log and show function    		    |
+28/06/19 | 20:00 | 22:00 | Coding     | implement show function  		         	|
+28/06/19 | 22:00 | 23:00 | Coding     | implement legit-commit -a function  		|
+29/06/19 | 14:00 | 16:00 | Debugging  | fix bug in subset 0,especially commit fuc   |
+29/06/19 | 16:00 | 18:30 | Coding  	  | implement rm function                       |
+29/06/19 | 20:30 | 24:00 | Coding     | implement rm --forece --cached function     |
+30/06/19 | 00:00 | 13:30 | Debugging  | Bug found rm a then add a       			|
+30/06/19 | 20:00 | 24:00 | Coding     | implement status function                   |
+01/07/19 | 13:00 | 18:00 | Debugging  | fix bug in subset 1,especially status fuc   |
+01/07/19 | 22:00 | 24:00 | Coding     | implement basic function of branch          |
+02/07/19 | 09:00 | 13:00 | Coding     | implement basic function of checkoot        |
+02/07/19 | 22:00 | 23:30 | Thinking   | figuring out what the branch do, it is hard |
+05/07/19 | 18:00 | 23:30 | Coding     | implement checkout function                 |
+06/07/19 | 00:00 | 01:30 | Coding     | implement checkout function                 |
+06/07/19 | 14:00 | 19:00 | Coding     | implement checkout function                 |
+06/07/19 | 21:00 | 23:00 | Coding     | making shell tests for my program           |
+07/07/19 | 20:00 | 23:00 | Coding     | making shell tests for my program           |
+08/07/19 | 21:00 | 22:00 | Coding     | implement checkoot function                 |
+08/07/19 | 22:00 | 23:00 | Coding     | making shell tests for my program           |
+09/07/19 | 14:00 | 18:00 | Coding     | implement checkoot function                 |
+09/07/19 | 22:00 | 23:00 | Coding     | making shell tests for my program           |
+11/07/19 | 14:00 | 19:00 | Debugging  | bug found in subset0 an subset1             |
+12/07/19 | 14:00 | 16:00 | Coding     | making shell tests for my program           |
+14/07/19 | 14:00 | 20:00 | Debugging  | fix bugs and change some codes              |
+------------------------------------------------------------------------------------|
+Author: Sijie Hou, z5193712															|	
+------------------------------------------------------------------------------------|
