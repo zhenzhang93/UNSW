@@ -1,0 +1,21 @@
+body {
+	background-size: cover;
+	background-image: url("imgs/background.jpg");
+}
+@keyframes hover{
+	0% {bottom: 118px}
+	50% {bottom: 120px}
+	100% {bottom: 118px}
+}
+
+#player {
+	width: 106px;
+	height: 96px;
+	background-image: url("imgs/ghost.png");
+	background-size: cover;
+	position: absolute;
+	bottom: 118px;
+	animation-name: hover;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}

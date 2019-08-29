@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>A Short Title</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
+      <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/basic.css"/>
+      <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/async.css"/>
+   </head>
+   <body>
+      <main role="main" id="main">
+         <h1>Fetch some data</h1>
+         <p>Use the DOM fetch API to request users from <code>https://jsonplaceholder.typicode.com/users</code>
+            and add each user to the DOM output element (element with id output) in their own individual div. Each div must have the class "user".</p>
+         <p> Display the user's name and company catch phrase. An example of the sort of output div we expect is below but feel free to get more creative </p>
+         <div style="width: 100%; display: flex; align-items: center; justify-content: center">
+           <div class="user"><h2>Leanne Graham</h2><p>Multi-layered client-server neural-net</p></div>
+         </div>
+         <div id="output"></div>
+      </main>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-core.min.js" charset="utf-8"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-clike.min.js" charset="utf-8"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js" charset="utf-8"></script>
+      <script type="module">
+         import runApp from './fetch.js';
+
+         runApp();
+      </script>
+   </body>
+</html>

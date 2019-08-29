@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Collapse</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
+      <link rel="stylesheet" href="/assets/css/basic.css"/>
+      <link rel="stylesheet" href="/assets/css/dom.css"/>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   </head>
+   <body>
+      <main role="main" id="main">
+         <h1>Collapse</h1>
+         <p class="lead"> Write some JS that makes the extra info section of each information element disappear on the click of the <i class="material-icons">expand_less</i> button. Once collapsed the item doesn't need to reexpand just yet. </p>
+         <p class="lead"> <b>Challange:</b> Finish this excersise using only a single click event listener and 0 changes to the html</p>
+         <br>
+         <div class="info-item">
+           <div class="tool-bar">
+             <div class="expand-collapse-btn">
+               <i class="material-icons" id="item-1">expand_less</i>
+             </div>
+           </div>
+           <div class="content">
+             <h3> COMP0000 </h3>
+             <p class="lead"> Teaches Kids how to cry effectively </p>
+             <p class="lead extra-info" id="item-1-content">
+              So really this course is all about preparing students for when they want to cry because of comp, it puts them in real world
+              situations where they will work with awful and buggy code and teach them to cope.
+              this course covers everything from efficient tissue usage to effective ice cream utilisation stratagies.
+             </p>
+           </div>
+         </div>
+         <br>
+         <div class="info-item">
+           <div class="tool-bar">
+             <div class="expand-collapse-btn">
+               <i class="material-icons" id="item-2">expand_less</i>
+             </div>
+           </div>
+           <div class="content">
+             <h3> COMP0001 </h3>
+             <p class="lead"> Teaches kids how to love </p>
+             <p class="lead extra-info" id="item-2-content">
+              In todays day and age who needs to learn how to code when none of us really remember how to love.
+              this will be a a full course covering how to love. Every week will be 3 tutes where you sit with your classmates
+              and recount stories of heart break and then hug it out.
+              lectures will be by a different guest lecturer every week, starting with marvin gaye.
+             </p>
+           </div>
+         </div>
+      </main>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-core.min.js" charset="utf-8"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-clike.min.js" charset="utf-8"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js" charset="utf-8"></script>
+      <script src="collapse.js"></script>
+   </body>
+</html>

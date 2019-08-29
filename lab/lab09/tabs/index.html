@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Tabs</title>
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
+      <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/basic.css"/>
+      <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/async.css"/>
+   </head>
+   <body>
+      <main role="main" id="main">
+         <h1>Switch some tabs</h1>
+         <p>
+              Each of these tabs below corrospond to a different planet.
+              You have a set of informtation on each planet in <code>planets.json</code>.
+              Write some code so that clicking on the tabs switches what information
+              is being shown on the page to match the currently selected tab.
+              You may find it useful to use the <code> active </code> class to
+              highlight which tab is currently selected.
+         </p>
+         <p>
+           Try to match the look of the current saturn tab
+         </p>
+         <br>
+         <ul class="nav nav-tabs">
+           <li class="nav-item">
+             <a id="tab-1" class="nav-link active">Saturn</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-2" class="nav-link">Earth</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-3" class="nav-link">Jupiter</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-4" class="nav-link">Mercury</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-5" class="nav-link">Uranus</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-6" class="nav-link">Venus</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-7" class="nav-link">Mars</a>
+           </li>
+           <li class="nav-item">
+             <a id="tab-8" class="nav-link">Neptune</a>
+           </li>
+           <!-- Pluto doesn't get to be in the club :(
+           <li class="nav-item">
+             <a class="nav-link">Pluto</a>
+           </li>
+            -->
+         </ul>
+         <div class="information" id="information">
+           <h2> Saturn </h2>
+           <hr>
+           <p>
+            The sixth planet from the sun is known most for its rings. When Galileo Galilei first studied Saturn in the early 1600s, 
+            he thought it was an object with three parts. Not knowing he was seeing a planet with rings, 
+            the stumped astronomer entered a small drawing — a symbol with one large circle and two smaller ones 
+            — in his notebook, as a noun in a sentence describing his discovery. 
+            More than 40 years later, Christiaan Huygens proposed that they were rings. 
+            The rings are made of ice and rock. Scientists are not yet sure how they formed. 
+            The gaseous planet is mostly hydrogen and helium. It has numerous moons.
+          </p>
+          <ul>
+            <li><b>Discovery:</b> Known to the ancients and visible to the naked eye</li>
+            <li><b>Named for:</b> Roman god of agriculture</li>
+            <li><b>Diameter:</b> 74,900 miles (120,500 km)</li>
+            <li><b>Orbit:</b> 29.5 Earth years</li>
+            <li><b>Day:</b> About 10.5 Earth hours</li>
+          </ul>
+         </div>
+      </main>
+      <script type="module">
+        import runApp from './tabs.js';
+
+        runApp();
+      </script>
+   </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Web Workers</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/basic.css" />
+    <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/async.css" />
+</head>
+
+<body>
+    <main role="main" id="main">
+        <h1>Web Workers</h1>
+        <p>This exercise builds from the fetch and list exercises, but rather than making our
+            fetch requests on the main thread (which blocks) we're going to delegate that process
+            to a <a href='https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers' target='blank'>Web Worker</a>.
+            We're gong to use the CatAPI this time, which, well delivers us
+            cats. Our Web Worker will do the fetching of our image data from the CatAPI:
+        </p>
+        <p><code><a href='https://api.thecatapi.com/v1/images/search?&mime_types=image/gif'>https://api.thecatapi.com/v1/images/search?&mime_types=image/gif</a></code></p>
+        <p>
+            Then, we're going to combine a <code>setInterval()</code> call every 5s to
+            move between each image in the output div. This is a super pared down example of how real-world long
+            polling might work.
+        </p>
+        <br>
+        <div id="output">
+            <img id="cat" src="" alt="A cat"/>
+        </div>
+    </main>
+    <script type="module">
+        import runApp from './main.js';
+
+        runApp();
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <title>A Short Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css">
+    <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/basic.css" />
+    <link rel="stylesheet" href="https://comp2041unsw.github.io/js/assets/css/async.css" />
+</head>
+
+<body>
+    <main role="main" id="main">
+        <h1>Perform an async 'join'</h1>
+        <p>As with last time we're going to use the DOM fetch API to again request users from
+            <code><a href='https://jsonplaceholder.typicode.com/users'>https://jsonplaceholder.typicode.com/users</a></code> and add each user to the DOM in their own individual div. Again, each div must have the class "user".
+            The twist here will be also requesting the <code>/posts</code> data and matching it up correctly with each user.
+            Each <code>post</code> for each user must sit inside the user div, and have a parent element with the class
+            'posts'. Each post must also have the class 'post'. The output should appear as below but again feel free to get more creative beyong this minimal markup.
+        </p>
+        <div style="width: 100%; display: flex; align-items: center; justify-content: center">
+        <div class="user"><h2>Leanne Graham</h2><p>Multi-layered client-server neural-net</p><ul class="posts"><li class="post">sunt aut facere repellat provident occaecati excepturi optio reprehenderit</li><li class="post">qui est esse</li><li class="post">ea molestias quasi exercitationem repellat qui ipsa sit aut</li><li class="post">eum et est occaecati</li><li class="post">nesciunt quas odio</li><li class="post">dolorem eum magni eos aperiam quia</li><li class="post">magnam facilis autem</li><li class="post">dolorem dolore est ipsam</li><li class="post">nesciunt iure omnis dolorem tempora et accusantium</li><li class="post">optio molestias id quia eum</li></ul></div>
+      </div>
+        <div id="output"></div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-core.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-clike.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-javascript.min.js" charset="utf-8"></script>
+    <script type="module">
+        import runApp from './fetch.js';
+
+        runApp();
+    </script>
+</body>
+
+</html>
