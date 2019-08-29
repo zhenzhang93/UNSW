@@ -38,7 +38,9 @@ else{
 	}	
 }
 			
-
+#$first=@file_content - $default_line;
+#$first = 0 if $fist < 0;
+#print @content[$first..$#content];
 	
 
 

@@ -24,6 +24,7 @@ while(my $line = <STDIN>){
 		}
 	}
 }
+print $maxnum;
 if($maxnum){
 	foreach my $newline(@lines){
 		if($newline =~ /$maxnum/){
