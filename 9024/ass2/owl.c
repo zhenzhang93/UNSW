@@ -1,7 +1,7 @@
 //9024 ass2
 //
 // Authors:
-// Sijie Hou (z5193712@unsw.edu.au)
+
 
 // Written: 23/07/2019
 
